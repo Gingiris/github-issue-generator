@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gingiris.github.io/github-issue-generator/sitemap.xml

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Issue Generator | Gingiris</title>
+    <meta name="description" content="Generate professional GitHub Issues for open source outreach. Auto-fetch repo info, create tailored messages. Free tool from Gingiris.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 GitHub Issue Generator</h1>
+            <p class="subtitle">Paste repo URL → Get professional outreach Issue</p>
+            <p class="credit">Based on <a href="https://github.com/Gingiris/gingiris-opensource" target="_blank">75% response rate</a> outreach tactics</p>
+        </header>
+
+        <main>
+            <!-- Step 1: URL Input -->
+            <div id="step1" class="step">
+                <div class="url-input-section">
+                    <label for="urlInput">🔗 Paste GitHub repo URL</label>
+                    <div class="url-input-wrapper">
+                        <input type="url" id="urlInput" placeholder="https://github.com/owner/repo" required>
+                        <button type="button" id="fetchBtn" class="btn-fetch">
+                            <span class="btn-text">Analyze Repo</span>
+                            <span class="btn-loading hidden">⏳</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Repo Info (auto-filled) -->
+            <div id="repoInfo" class="repo-info hidden">
+                <h3>📊 Repo Analysis</h3>
+                <div class="repo-stats">
+                    <div class="stat">
+                        <span class="stat-label">Name</span>
+                        <span class="stat-value" id="repoName">-</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Stars</span>
+                        <span class="stat-value" id="repoStars">-</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Age</span>
+                        <span class="stat-value" id="repoAge">-</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Stage</span>
+                        <span class="stat-value" id="repoStage">-</span>
+                    </div>
+                </div>
+                <p class="repo-desc" id="repoDesc">-</p>
+            </div>
+
+            <!-- Step 3: Customize -->
+            <form id="issueForm" class="hidden">
+                <div class="form-group">
+                    <label for="yourProject">Your Project/Expertise (optional)</label>
+                    <input type="text" id="yourProject" placeholder="e.g., Growth playbook for open source projects">
+                </div>
+
+                <div class="form-group">
+                    <label for="issueType">Issue Type</label>
+                    <select id="issueType">
+                        <option value="growth">💡 Growth Strategy Proposal</option>
+                        <option value="docs">📚 Documentation Improvement</option>
+                        <option value="feature">✨ Feature Suggestion</option>
+                        <option value="collab">🤝 Collaboration Request</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn-generate">✨ Generate Issues</button>
+            </form>
+
+            <!-- Results -->
+            <div id="results" class="results hidden">
+                <h2>Generated Issues</h2>
+                
+                <div class="issue-card" id="issue1">
+                    <div class="issue-header">
+                        <span class="issue-label">🎯 Direct Value Offer</span>
+                    </div>
+                    <div class="issue-title-wrapper">
+                        <label>Title:</label>
+                        <div class="issue-title"></div>
+                    </div>
+                    <div class="issue-body-wrapper">
+                        <label>Body:</label>
+                        <div class="issue-body"></div>
+                    </div>
+                    <button class="btn-copy" onclick="copyIssue(1)">📋 Copy All</button>
+                </div>
+
+                <div class="issue-card" id="issue2">
+                    <div class="issue-header">
+                        <span class="issue-label">🤝 Collaborative Approach</span>
+                    </div>
+                    <div class="issue-title-wrapper">
+                        <label>Title:</label>
+                        <div class="issue-title"></div>
+                    </div>
+                    <div class="issue-body-wrapper">
+                        <label>Body:</label>
+                        <div class="issue-body"></div>
+                    </div>
+                    <button class="btn-copy" onclick="copyIssue(2)">📋 Copy All</button>
+                </div>
+
+                <div class="tips-box">
+                    <h3>💡 Pro Tips</h3>
+                    <ul>
+                        <li><strong>Issue first, PR later:</strong> 75% success vs 27% for direct PRs</li>
+                        <li><strong>Respond within 12h:</strong> When maintainer replies, engage fast</li>
+                        <li><strong>Chinese repos:</strong> Use Chinese, mention "出海增长"</li>
+                        <li><strong>Show research:</strong> Reference their stars, recent activity</li>
+                    </ul>
+                </div>
+
+                <button class="btn-restart" onclick="restart()">🔄 Analyze another repo</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>
+                Want the complete open source playbook? 
+                <a href="https://github.com/Gingiris/gingiris-opensource" target="_blank">⭐ Star on GitHub</a> |
+                <a href="https://gingiris.com" target="_blank">Gingiris</a>
+            </p>
+            <p class="footer-note">Free tool by Gingiris • No data collected</p>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast hidden">Copied to clipboard!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

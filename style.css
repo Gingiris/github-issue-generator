@@ -493,3 +493,17 @@ footer a:hover {
 .seo-content strong {
     color: var(--text);
 }
+
+/* CTA Box */
+.cta-box {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.cta-box p { font-size: 1.1rem; margin-bottom: 1rem; font-weight: 500; }
+.cta-box .btn { margin: 0.25rem; display: inline-flex; align-items: center; padding: 0.75rem 1.5rem; border-radius: 8px; text-decoration: none; font-weight: 500; }
+.cta-box .btn-primary { background: white; color: #2563eb; }
+.cta-box .btn-outline { border: 2px solid white; color: white; background: transparent; }

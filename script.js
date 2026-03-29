@@ -5,7 +5,26 @@ console.log('GitHub Issue Generator loaded');
 
 let repoData = null;
 
+// Token management
+function saveToken() {
+    const token = document.getElementById('githubToken')?.value.trim();
+    if (token) {
+        localStorage.setItem('gh_token', token);
+        alert('Token saved! Try analyzing again.');
+    }
+}
+
+function getToken() {
+    return localStorage.getItem('gh_token') || '';
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    // Load saved token
+    const savedToken = getToken();
+    if (savedToken) {
+        const tokenInput = document.getElementById('githubToken');
+        if (tokenInput) tokenInput.value = savedToken;
+    }
     document.getElementById('fetchBtn')?.addEventListener('click', analyzeRepo);
     document.getElementById('urlInput')?.addEventListener('keypress', e => {
         if (e.key === 'Enter') { e.preventDefault(); analyzeRepo(); }
@@ -30,7 +49,9 @@ async function analyzeRepo() {
 
     try {
         const [, owner, repo] = match;
-        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
+        const token = getToken();
+        const headers = token ? { 'Authorization': `token ${token}` } : {};
+        const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`, { headers });
         
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));

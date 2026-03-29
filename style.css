@@ -119,6 +119,51 @@ h1 {
     cursor: not-allowed;
 }
 
+/* Token section */
+.token-section {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+.token-section summary {
+    cursor: pointer;
+    color: var(--text-light);
+}
+
+.token-section summary:hover {
+    color: var(--link);
+}
+
+.token-hint {
+    margin: 0.5rem 0;
+    color: var(--text-light);
+    font-size: 0.8125rem;
+}
+
+.token-hint a {
+    color: var(--link);
+}
+
+.token-section input {
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+    width: calc(100% - 100px);
+    display: inline-block;
+}
+
+.token-section button {
+    padding: 0.5rem 1rem;
+    background: var(--border);
+    border: none;
+    border-radius: 4px;
+    color: var(--text);
+    cursor: pointer;
+}
+
+.token-section button:hover {
+    background: #3d444d;
+}
+
 /* Repo Info */
 .repo-info {
     background: var(--card-bg);

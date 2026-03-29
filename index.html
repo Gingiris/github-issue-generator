@@ -67,6 +67,12 @@
                             <span class="btn-loading hidden">⏳</span>
                         </button>
                     </div>
+                    <details class="token-section">
+                        <summary>⚠️ Rate limited? Add your GitHub token</summary>
+                        <p class="token-hint">Get a token from <a href="https://github.com/settings/tokens" target="_blank">GitHub Settings</a> (no permissions needed)</p>
+                        <input type="password" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                        <button type="button" onclick="saveToken()">Save Token</button>
+                    </details>
                 </div>
             </div>
 

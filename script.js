@@ -31,7 +31,17 @@ async function analyzeRepo() {
     try {
         const [, owner, repo] = match;
         const response = await fetch(`https://api.github.com/repos/${owner}/${repo}`);
-        if (!response.ok) throw new Error('GitHub API error');
+        
+        if (!response.ok) {
+            const errorData = await response.json().catch(() => ({}));
+            if (response.status === 403) {
+                throw new Error('GitHub API rate limit exceeded. Please wait a few minutes and try again.');
+            } else if (response.status === 404) {
+                throw new Error('Repository not found. Check the URL.');
+            } else {
+                throw new Error(errorData.message || 'GitHub API error');
+            }
+        }
         
         repoData = await response.json();
         displayRepoInfo(repoData);
@@ -41,8 +51,8 @@ async function analyzeRepo() {
         document.getElementById('issueForm')?.scrollIntoView({ behavior: 'smooth' });
         
     } catch (error) {
-        console.error(error);
-        alert('Could not fetch repo info. Check the URL.');
+        console.error('Fetch error:', error);
+        alert(error.message || 'Could not fetch repo info. Check the URL.');
     } finally {
         btn.querySelector('.btn-text')?.classList.remove('hidden');
         btn.querySelector('.btn-loading')?.classList.add('hidden');
